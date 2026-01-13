@@ -136,7 +136,7 @@ export const SearchBar = () => {
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <Box ref={anchorRef} sx={{ position: 'relative', flex: 1, maxWidth: { xs: '100%', sm: 400, md: 500 } }}>
+      <Box ref={anchorRef} sx={{ position: 'relative', width: '100%' }}>
         {/* Search Input - Always Visible */}
         <Box
           sx={{
@@ -144,9 +144,9 @@ export const SearchBar = () => {
             alignItems: 'center',
             gap: 1.5,
             px: 2,
-            py: 1,
+            py: { xs: 0.75, md: 1 },
             backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.04)' : 'rgba(255, 255, 255, 0.05)',
-            borderRadius: 2,
+            borderRadius: '30px',
             transition: 'all 0.2s',
             border: `1px solid ${open ? theme.palette.primary.main : 'transparent'}`,
             '&:hover': {
@@ -165,7 +165,7 @@ export const SearchBar = () => {
             autoComplete="off"
             sx={{
               flex: 1,
-              fontSize: '0.9375rem',
+              fontSize: '0.875rem',
               '& input': {
                 padding: 0,
               },
@@ -183,10 +183,18 @@ export const SearchBar = () => {
           anchorEl={anchorRef.current}
           placement="bottom-start"
           transition
+          disablePortal={false}
+          modifiers={[
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 8],
+              },
+            },
+          ]}
           sx={{
             zIndex: theme.zIndex.modal,
-            width: '100%',
-            minWidth: { xs: 300, sm: 400, md: 500 },
+            width: anchorRef.current?.offsetWidth || 380,
           }}
         >
           {({ TransitionProps }) => (
@@ -204,7 +212,7 @@ export const SearchBar = () => {
                 {/* Search Results */}
                 <Box
                   sx={{
-                    maxHeight: { xs: '60vh', md: 400 },
+                    maxHeight: { xs: 300, md: 350 },
                     overflow: 'auto',
                     WebkitOverflowScrolling: 'touch',
                   }}
@@ -212,18 +220,18 @@ export const SearchBar = () => {
                   {filteredResults.length === 0 ? (
                     <Box
                       sx={{
-                        p: 6,
+                        p: 4,
                         textAlign: 'center',
                       }}
                     >
                       <SearchIcon
                         sx={{
-                          fontSize: 48,
+                          fontSize: 40,
                           color: 'text.disabled',
-                          mb: 2,
+                          mb: 1.5,
                         }}
                       />
-                      <Typography variant="body1" color="text.secondary">
+                      <Typography variant="body2" color="text.secondary" fontSize="0.875rem">
                         {searchQuery
                           ? 'No results found'
                           : 'Start typing to search...'}
@@ -233,15 +241,15 @@ export const SearchBar = () => {
                     Object.entries(groupedResults).map(([category, results], idx) => (
                       <Box key={category}>
                         {idx > 0 && <Divider />}
-                        <Box sx={{ py: 1 }}>
+                        <Box sx={{ py: 0.5 }}>
                           <Typography
                             variant="caption"
                             sx={{
-                              px: 3,
-                              py: 1,
+                              px: 2.5,
+                              py: 0.75,
                               color: 'text.secondary',
                               fontWeight: 700,
-                              fontSize: '0.75rem',
+                              fontSize: '0.6875rem',
                               letterSpacing: '0.5px',
                               textTransform: 'uppercase',
                               display: 'block',
@@ -255,25 +263,26 @@ export const SearchBar = () => {
                                 <ListItemButton
                                   onClick={handleClose}
                                   sx={{
-                                    px: 3,
-                                    py: 1.5,
+                                    px: 2.5,
+                                    py: 1,
                                     '&:hover': {
                                       backgroundColor: 'rgba(93, 135, 255, 0.08)',
                                     },
                                   }}
                                 >
                                   {result.icon && (
-                                    <ListItemIcon sx={{ minWidth: 40 }}>
+                                    <ListItemIcon sx={{ minWidth: 36 }}>
                                       <Box
                                         sx={{
-                                          width: 36,
-                                          height: 36,
+                                          width: 32,
+                                          height: 32,
                                           borderRadius: '8px',
                                           backgroundColor: 'rgba(93, 135, 255, 0.1)',
                                           display: 'flex',
                                           alignItems: 'center',
                                           justifyContent: 'center',
                                           color: 'primary.main',
+                                          fontSize: 18,
                                         }}
                                       >
                                         {result.icon}
@@ -284,11 +293,11 @@ export const SearchBar = () => {
                                     primary={result.title}
                                     secondary={result.subtitle}
                                     primaryTypographyProps={{
-                                      fontSize: '0.9375rem',
+                                      fontSize: '0.875rem',
                                       fontWeight: 500,
                                     }}
                                     secondaryTypographyProps={{
-                                      fontSize: '0.8125rem',
+                                      fontSize: '0.75rem',
                                     }}
                                   />
                                 </ListItemButton>
@@ -302,10 +311,11 @@ export const SearchBar = () => {
                 </Box>
 
                 {/* Footer with shortcuts */}
-                {open && (
+                {open && filteredResults.length > 0 && (
                   <Box
                     sx={{
-                      p: 1.5,
+                      px: 2.5,
+                      py: 1,
                       borderTop: `1px solid ${theme.palette.divider}`,
                       backgroundColor: 'background.default',
                       display: 'flex',
@@ -313,25 +323,26 @@ export const SearchBar = () => {
                       alignItems: 'center',
                     }}
                   >
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" fontSize="0.7rem">
                       Press ESC to close
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Box sx={{ display: 'flex', gap: 0.75, alignItems: 'center' }}>
                       <Typography
                         variant="caption"
                         sx={{
-                          px: 1,
-                          py: 0.5,
+                          px: 0.75,
+                          py: 0.25,
                           backgroundColor: 'background.paper',
                           border: `1px solid ${theme.palette.divider}`,
                           borderRadius: 0.5,
-                          fontSize: '0.7rem',
+                          fontSize: '0.65rem',
                           fontWeight: 600,
+                          lineHeight: 1.5,
                         }}
                       >
                         ↑↓
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography variant="caption" color="text.secondary" fontSize="0.7rem">
                         Navigate
                       </Typography>
                     </Box>

@@ -107,9 +107,10 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
         px: { xs: 2, sm: 2.5, md: 3 }, 
         minHeight: { xs: 70, md: 70 },
         gap: { xs: 1, sm: 2 },
+        width: '100%',
       }}>
         {/* Left: Menu and Search */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 }, flex: 1, maxWidth: { xs: '60%', sm: '50%', md: '45%', lg: '40%' } }}>
           {isMobile && (
             <IconButton
               edge="start"
@@ -120,6 +121,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
                 color: 'text.primary',
                 width: 40,
                 height: 40,
+                flexShrink: 0,
               }}
             >
               <MenuIcon />
