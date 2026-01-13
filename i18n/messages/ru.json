@@ -1,0 +1,57 @@
+{
+  "common": {
+    "appName": "Трукмент",
+    "dashboard": "Панель управления",
+    "vehicles": "Транспорт",
+    "fuel": "Топливо",
+    "maintenance": "Обслуживание",
+    "settings": "Настройки",
+    "profile": "Профиль",
+    "logout": "Выйти"
+  },
+  "navigation": {
+    "home": "Главная",
+    "apps": "Приложения",
+    "modern": "Современный",
+    "eCommerce": "Электронная коммерция",
+    "frontendPages": "Страницы",
+    "contacts": "Контакты",
+    "blog": "Блог",
+    "chats": "Чаты",
+    "users": "Пользователи",
+    "notes": "Заметки",
+    "calendar": "Календарь",
+    "email": "Почта",
+    "tickets": "Тикеты",
+    "new": "Новое"
+  },
+  "dashboard": {
+    "welcomeBack": "С возвращением {name}!",
+    "todaySales": "Продажи сегодня",
+    "performance": "Производительность",
+    "expense": "Расходы",
+    "sales": "Продажи",
+    "totalVehicles": "Всего транспорта",
+    "activeTrips": "Активные рейсы",
+    "fuelAlerts": "Уведомления о топливе",
+    "maintenanceDue": "Требуется обслуживание",
+    "yearlyBreakup": "Годовая разбивка",
+    "monthlyEarnings": "Ежемесячный доход",
+    "lastYear": "прошлый год",
+    "revenueUpdates": "Обновления дохода",
+    "overviewOfProfit": "Обзор прибыли",
+    "salesOverview": "Обзор продаж",
+    "everyMonth": "Каждый месяц",
+    "employeeSalary": "Зарплата сотрудников",
+    "customers": "Клиенты",
+    "projects": "Проекты",
+    "totalEarnings": "Общий доход",
+    "earningsThisMonth": "Доход в этом месяце",
+    "expenseThisMonth": "Расходы в этом месяце",
+    "viewFullReport": "Посмотреть полный отчет"
+  },
+  "theme": {
+    "light": "Светлая тема",
+    "dark": "Темная тема"
+  }
+}

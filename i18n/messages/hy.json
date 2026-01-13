@@ -1,0 +1,57 @@
+{
+  "common": {
+    "appName": "Թրաքմենթ",
+    "dashboard": "Վահանակ",
+    "vehicles": "Տրանսպորտ",
+    "fuel": "Վառելիք",
+    "maintenance": "Սպասարկում",
+    "settings": "Կարգավորումներ",
+    "profile": "Պրոֆիլ",
+    "logout": "Դուրս գալ"
+  },
+  "navigation": {
+    "home": "Գլխավոր",
+    "apps": "Հավելվածներ",
+    "modern": "Ժամանակակից",
+    "eCommerce": "Էլեկտրոնային առևտուր",
+    "frontendPages": "Էջեր",
+    "contacts": "Կոնտակտներ",
+    "blog": "Բլոգ",
+    "chats": "Զրույցներ",
+    "users": "Օգտատերեր",
+    "notes": "Նշումներ",
+    "calendar": "Օրացույց",
+    "email": "Էլ․ փոստ",
+    "tickets": "Տիկետներ",
+    "new": "Նոր"
+  },
+  "dashboard": {
+    "welcomeBack": "Բարի վերադարձ {name}!",
+    "todaySales": "Այսօրվա վաճառք",
+    "performance": "Կատարողականություն",
+    "expense": "Ծախսեր",
+    "sales": "Վաճառք",
+    "totalVehicles": "Ընդհանուր տրանսպորտ",
+    "activeTrips": "Ակտիվ երթուղիներ",
+    "fuelAlerts": "Վառելիքի ծանուցումներ",
+    "maintenanceDue": "Սպասարկման կարիք ունի",
+    "yearlyBreakup": "Տարեկան բաշխում",
+    "monthlyEarnings": "Ամսական եկամուտ",
+    "lastYear": "անցյալ տարի",
+    "revenueUpdates": "Եկամտի թարմացումներ",
+    "overviewOfProfit": "Շահույթի ակնարկ",
+    "salesOverview": "Վաճառքի ակնարկ",
+    "everyMonth": "Ամեն ամիս",
+    "employeeSalary": "Աշխատողների աշխատավարձ",
+    "customers": "Հաճախորդներ",
+    "projects": "Նախագծեր",
+    "totalEarnings": "Ընդհանուր եկամուտ",
+    "earningsThisMonth": "Այս ամսվա եկամուտ",
+    "expenseThisMonth": "Այս ամսվա ծախսեր",
+    "viewFullReport": "Դիտել ամբողջական հաշվետվությունը"
+  },
+  "theme": {
+    "light": "Բաց ռեժիմ",
+    "dark": "Մուգ ռեժիմ"
+  }
+}

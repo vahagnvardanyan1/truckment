@@ -1,0 +1,57 @@
+{
+  "common": {
+    "appName": "Truckment",
+    "dashboard": "Dashboard",
+    "vehicles": "Vehicles",
+    "fuel": "Fuel",
+    "maintenance": "Maintenance",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "navigation": {
+    "home": "Home",
+    "apps": "Apps",
+    "modern": "Modern",
+    "eCommerce": "eCommerce",
+    "frontendPages": "Frontend Pages",
+    "contacts": "Contacts",
+    "blog": "Blog",
+    "chats": "Chats",
+    "users": "Users",
+    "notes": "Notes",
+    "calendar": "Calendar",
+    "email": "Email",
+    "tickets": "Tickets",
+    "new": "New"
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back {name}!",
+    "todaySales": "Today's Sales",
+    "performance": "Performance",
+    "expense": "Expense",
+    "sales": "Sales",
+    "totalVehicles": "Total Vehicles",
+    "activeTrips": "Active Trips",
+    "fuelAlerts": "Fuel Alerts",
+    "maintenanceDue": "Maintenance Due",
+    "yearlyBreakup": "Yearly Breakup",
+    "monthlyEarnings": "Monthly Earnings",
+    "lastYear": "last year",
+    "revenueUpdates": "Revenue Updates",
+    "overviewOfProfit": "Overview of Profit",
+    "salesOverview": "Sales Overview",
+    "everyMonth": "Every month",
+    "employeeSalary": "Employee Salary",
+    "customers": "Customers",
+    "projects": "Projects",
+    "totalEarnings": "Total Earnings",
+    "earningsThisMonth": "Earnings this month",
+    "expenseThisMonth": "Expense this month",
+    "viewFullReport": "View Full Report"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  }
+}
