@@ -96,7 +96,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
       sx={{
         backgroundColor: 'background.paper',
         borderBottom: `1px solid ${theme.palette.divider}`,
-        zIndex: theme.zIndex.drawer + 1,
+        zIndex: { xs: theme.zIndex.drawer - 1, lg: theme.zIndex.drawer + 1 },
         top: 0,
         left: 0,
         right: 0,

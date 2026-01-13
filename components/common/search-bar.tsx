@@ -194,7 +194,13 @@ export const SearchBar = () => {
           ]}
           sx={{
             zIndex: theme.zIndex.modal,
-            width: anchorRef.current?.offsetWidth || 380,
+            width: {
+              xs: '100vw',
+              sm: anchorRef.current?.offsetWidth || 400,
+              md: anchorRef.current?.offsetWidth || 500,
+            },
+            left: { xs: '0 !important', sm: 'auto' },
+            right: { xs: 0, sm: 'auto' },
           }}
         >
           {({ TransitionProps }) => (
@@ -202,17 +208,21 @@ export const SearchBar = () => {
               <Paper
                 elevation={8}
                 sx={{
-                  mt: 1.5,
-                  borderRadius: 2,
+                  mt: { xs: 0, sm: 1.5 },
+                  borderRadius: { xs: 0, sm: 2 },
                   overflow: 'hidden',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-                  border: `1px solid ${theme.palette.divider}`,
+                  boxShadow: {
+                    xs: '0 4px 16px rgba(0,0,0,0.15)',
+                    sm: '0 8px 32px rgba(0,0,0,0.12)',
+                  },
+                  border: { xs: 'none', sm: `1px solid ${theme.palette.divider}` },
+                  borderTop: { xs: `1px solid ${theme.palette.divider}`, sm: `1px solid ${theme.palette.divider}` },
                 }}
               >
                 {/* Search Results */}
                 <Box
                   sx={{
-                    maxHeight: { xs: 300, md: 350 },
+                    maxHeight: { xs: 'calc(100vh - 140px)', sm: 350, md: 350 },
                     overflow: 'auto',
                     WebkitOverflowScrolling: 'touch',
                   }}
@@ -245,11 +255,11 @@ export const SearchBar = () => {
                           <Typography
                             variant="caption"
                             sx={{
-                              px: 2.5,
-                              py: 0.75,
+                              px: { xs: 3, sm: 2.5 },
+                              py: { xs: 1, sm: 0.75 },
                               color: 'text.secondary',
                               fontWeight: 700,
-                              fontSize: '0.6875rem',
+                              fontSize: { xs: '0.75rem', sm: '0.6875rem' },
                               letterSpacing: '0.5px',
                               textTransform: 'uppercase',
                               display: 'block',
@@ -263,26 +273,29 @@ export const SearchBar = () => {
                                 <ListItemButton
                                   onClick={handleClose}
                                   sx={{
-                                    px: 2.5,
-                                    py: 1,
+                                    px: { xs: 3, sm: 2.5 },
+                                    py: { xs: 1.5, sm: 1 },
                                     '&:hover': {
                                       backgroundColor: 'rgba(93, 135, 255, 0.08)',
+                                    },
+                                    '&:active': {
+                                      backgroundColor: 'rgba(93, 135, 255, 0.12)',
                                     },
                                   }}
                                 >
                                   {result.icon && (
-                                    <ListItemIcon sx={{ minWidth: 36 }}>
+                                    <ListItemIcon sx={{ minWidth: { xs: 44, sm: 40 } }}>
                                       <Box
                                         sx={{
-                                          width: 32,
-                                          height: 32,
+                                          width: { xs: 38, sm: 34 },
+                                          height: { xs: 38, sm: 34 },
                                           borderRadius: '8px',
                                           backgroundColor: 'rgba(93, 135, 255, 0.1)',
                                           display: 'flex',
                                           alignItems: 'center',
                                           justifyContent: 'center',
                                           color: 'primary.main',
-                                          fontSize: 18,
+                                          fontSize: { xs: 20, sm: 18 },
                                         }}
                                       >
                                         {result.icon}
@@ -293,11 +306,11 @@ export const SearchBar = () => {
                                     primary={result.title}
                                     secondary={result.subtitle}
                                     primaryTypographyProps={{
-                                      fontSize: '0.875rem',
+                                      fontSize: { xs: '0.9375rem', sm: '0.875rem' },
                                       fontWeight: 500,
                                     }}
                                     secondaryTypographyProps={{
-                                      fontSize: '0.75rem',
+                                      fontSize: { xs: '0.8125rem', sm: '0.75rem' },
                                     }}
                                   />
                                 </ListItemButton>

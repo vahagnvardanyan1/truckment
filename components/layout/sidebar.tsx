@@ -499,21 +499,24 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
         sx={{
           width: drawerWidth,
           flexShrink: 0,
+          zIndex: variant === 'temporary' ? theme.zIndex.drawer + 2 : theme.zIndex.drawer,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
             border: 'none',
             boxShadow: variant === 'temporary'
-              ? '2px 0 16px rgba(0,0,0,0.1)'
+              ? '2px 0 16px rgba(0,0,0,0.15)'
               : 'none',
             borderRight: variant === 'permanent' ? `1px solid ${theme.palette.divider}` : 'none',
+            zIndex: variant === 'temporary' ? theme.zIndex.drawer + 2 : theme.zIndex.drawer,
             transition: theme.transitions.create(['width'], {
               easing: theme.transitions.easing.sharp,
               duration: 225,
             }),
           },
           '& .MuiBackdrop-root': {
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: variant === 'temporary' ? theme.zIndex.drawer + 1 : theme.zIndex.drawer,
           },
         }}
       >
