@@ -430,7 +430,7 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
           size="small"
           sx={{
             position: 'fixed',
-            left: showCollapsed ? COLLAPSED_WIDTH - 14 : drawerWidth - 14,
+            left: showCollapsed ? COLLAPSED_WIDTH - 30 : drawerWidth - 30,
             top: '50%',
             transform: 'translateY(-50%)',
             width: 28,
