@@ -45,7 +45,13 @@ export const AppShell = ({ children }: AppShellProps) => {
   const sidebarWidth = isCollapsed && !isMobile ? COLLAPSED_WIDTH : DRAWER_WIDTH;
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
+    <Box sx={{ 
+      display: 'flex', 
+      minHeight: '100vh', 
+      width: '100%', 
+      overflow: 'hidden',
+      backgroundColor: { xs: 'background.default', md: 'background.default' },
+    }}>
       {/* Sidebar */}
       {isMobile ? (
         <Sidebar
@@ -83,7 +89,8 @@ export const AppShell = ({ children }: AppShellProps) => {
         <TopBar onMenuClick={handleDrawerToggle} onSidebarToggle={handleSidebarToggle} />
         <Box 
           sx={{ 
-            p: { xs: 2, sm: 3 },
+            p: { xs: 2, md: 2 },
+            pt: { xs: 2, md: 0 },
             flex: 1,
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch',

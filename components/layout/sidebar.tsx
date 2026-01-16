@@ -29,7 +29,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+
+import type { ComponentProps } from 'react';
 
 import { Link, usePathname } from '@/i18n/routing';
 import { useSidebarStore } from '@/lib/stores/sidebar-store';
@@ -47,7 +48,7 @@ interface NavItem {
   id: string;
   label: string;
   icon: React.ReactNode;
-  path: string;
+  path: ComponentProps<typeof Link>['href'];
   badge?: string | number;
 }
 
@@ -67,72 +68,76 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
     {
       id: 'modern',
       label: 'Modern',
-      icon: <DashboardIcon sx={{ fontSize: 20 }} />,
+      icon: <DashboardIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard',
       badge: 'New',
     },
     {
       id: 'vehicles',
       label: tCommon('vehicles'),
-      icon: <LocalShippingIcon sx={{ fontSize: 20 }} />,
+      icon: <LocalShippingIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/vehicles',
     },
     {
       id: 'fuel',
       label: tCommon('fuel'),
-      icon: <LocalGasStationIcon sx={{ fontSize: 20 }} />,
+      icon: <LocalGasStationIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/fuel',
     },
     {
       id: 'maintenance',
       label: tCommon('maintenance'),
-      icon: <BuildIcon sx={{ fontSize: 20 }} />,
+      icon: <BuildIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/maintenance',
     },
   ];
 
-  // APPS section navigation
-  const appsNavItems: NavItem[] = [
+  // TOOLS section navigation
+  const toolsNavItems: NavItem[] = [
     {
       id: 'contacts',
       label: t('contacts'),
-      icon: <ContactsIcon sx={{ fontSize: 20 }} />,
+      icon: <ContactsIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/contacts',
       badge: 2,
     },
     {
       id: 'chats',
       label: t('chats'),
-      icon: <ChatIcon sx={{ fontSize: 20 }} />,
+      icon: <ChatIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/chats',
     },
     {
       id: 'calendar',
       label: t('calendar'),
-      icon: <CalendarMonthIcon sx={{ fontSize: 20 }} />,
+      icon: <CalendarMonthIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/calendar',
     },
+  ];
+
+  // SUPPORT section navigation
+  const supportNavItems: NavItem[] = [
     {
       id: 'email',
       label: t('email'),
-      icon: <EmailIcon sx={{ fontSize: 20 }} />,
+      icon: <EmailIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/email',
     },
     {
       id: 'tickets',
       label: t('tickets'),
-      icon: <ConfirmationNumberIcon sx={{ fontSize: 20 }} />,
+      icon: <ConfirmationNumberIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/tickets',
     },
     {
       id: 'settings',
       label: tCommon('settings'),
-      icon: <SettingsIcon sx={{ fontSize: 20 }} />,
+      icon: <SettingsIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/settings',
     },
   ];
 
-  const isActive = (itemPath: string) => {
+  const isActive = (itemPath: ComponentProps<typeof Link>['href']) => {
     return pathname === itemPath;
   };
 
@@ -156,10 +161,19 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
                 mx: 1,
                 my: 0.25,
                 borderRadius: '10px',
-                backgroundColor: active ? 'primary.main' : 'transparent',
-                color: active ? 'white' : 'text.secondary',
+                position: 'relative',
+                backgroundColor: active 
+                  ? theme.palette.mode === 'light'
+                    ? 'rgba(93, 135, 255, 0.08)'
+                    : 'rgba(93, 135, 255, 0.12)'
+                  : 'transparent',
+                color: active ? 'primary.main' : 'text.secondary',
+                borderLeft: active ? '3px solid' : 'none',
+                borderColor: 'primary.main',
                 '&:hover': {
-                  backgroundColor: active ? 'primary.dark' : 'action.hover',
+                  backgroundColor: theme.palette.mode === 'light' 
+                    ? 'rgba(93, 135, 255, 0.08)'
+                    : 'rgba(93, 135, 255, 0.12)',
                 },
               }}
             >
@@ -175,7 +189,7 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
       <ListItem key={item.id} disablePadding>
         <ListItemButton
           component={Link}
-          href={item.path}
+          href={item.path as any}
           onClick={isMobile ? onClose : undefined}
           sx={{
             minHeight: { xs: 52, md: 46 },
@@ -184,22 +198,21 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
             mx: { xs: 0, md: 1 },
             my: { xs: 0, md: 0.25 },
             borderRadius: { xs: 0, md: '10px' },
+            position: 'relative',
             backgroundColor: active 
-              ? 'primary.main'
+              ? theme.palette.mode === 'light'
+                ? 'rgba(93, 135, 255, 0.08)'
+                : 'rgba(93, 135, 255, 0.12)'
               : 'transparent',
-            color: active ? 'white' : 'text.primary',
-            borderLeft: { 
-              xs: active ? '4px solid' : 'none', 
-              md: 'none' 
-            },
-            borderColor: { xs: 'primary.main', md: 'transparent' },
+            borderLeft: active 
+              ? { xs: '3px solid', md: '3px solid' }
+              : 'none',
+            borderColor: 'primary.main',
             transition: 'all 0.2s ease-in-out',
             '&:hover': {
-              backgroundColor: active 
-                ? 'primary.dark'
-                : theme.palette.mode === 'light' 
-                  ? 'rgba(93, 135, 255, 0.08)'
-                  : 'rgba(93, 135, 255, 0.12)',
+              backgroundColor: theme.palette.mode === 'light' 
+                ? 'rgba(93, 135, 255, 0.08)'
+                : 'rgba(93, 135, 255, 0.12)',
             },
             '&:active': {
               transform: 'scale(0.98)',
@@ -209,7 +222,7 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
           <ListItemIcon
             sx={{
               minWidth: { xs: 42, md: 40 },
-              color: active ? 'white' : 'text.secondary',
+              color: active ? 'primary.main' : 'text.secondary',
               transition: 'color 0.2s',
             }}
           >
@@ -220,7 +233,7 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
             primaryTypographyProps={{
               fontSize: { xs: '0.9375rem', md: '0.875rem' },
               fontWeight: active ? 600 : 500,
-              color: active ? 'white' : 'text.primary',
+              color: active ? 'primary.main' : 'text.primary',
             }}
           />
           {item.badge && (
@@ -235,12 +248,11 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
                 borderRadius: '11px',
                 ...(isNewBadge
                   ? {
-                      backgroundColor: active ? 'rgba(255, 255, 255, 0.25)' : 'secondary.light',
+                      backgroundColor: active ? 'primary.main' : 'secondary.light',
                       color: active ? 'white' : 'secondary.main',
-                      border: active ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
                     }
                   : {
-                      backgroundColor: active ? 'rgba(255, 255, 255, 0.25)' : 'secondary.main',
+                      backgroundColor: 'secondary.main',
                       color: 'white',
                     }),
               }}
@@ -285,84 +297,47 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'background.paper',
+        backgroundColor: { xs: 'background.paper', md: 'transparent' },
+        p: { xs: 0, md: 2 },
       }}
     >
-      {/* Logo Header */}
       <Box
         sx={{
-          p: { xs: 2.5, md: 2.5 },
+          height: '100%',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: showCollapsed ? 'center' : 'space-between',
-          minHeight: 70,
-          borderBottom: `1px solid ${theme.palette.divider}`,
+          flexDirection: 'column',
+          backgroundColor: 'background.paper',
+          borderRadius: { xs: 0, md: '20px' },
+          overflow: 'hidden',
+          boxShadow: { xs: 'none', md: '0 0 20px rgba(0,0,0,0.05)' },
         }}
       >
-        {showCollapsed ? (
-          <Box
+      {/* Header Section - Only close button on mobile */}
+      {isMobile && (
+        <Box
+          sx={{
+            p: 2.5,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            minHeight: 64,
+            borderBottom: `1px solid ${theme.palette.divider}`,
+          }}
+        >
+          <IconButton 
+            onClick={onClose} 
+            size="small"
             sx={{
-              width: 42,
-              height: 42,
-              borderRadius: '12px',
-              background: theme.palette.gradient.primary,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 12px rgba(93, 135, 255, 0.25)',
+              color: 'text.secondary',
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              },
             }}
           >
-            <LocalShippingIcon sx={{ color: 'white', fontSize: 24 }} />
-          </Box>
-        ) : (
-          <>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <Box
-                sx={{
-                  width: 42,
-                  height: 42,
-                  borderRadius: '12px',
-                  background: theme.palette.gradient.primary,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 12px rgba(93, 135, 255, 0.25)',
-                }}
-              >
-                <LocalShippingIcon sx={{ color: 'white', fontSize: 22 }} />
-              </Box>
-              <Typography
-                variant="h6"
-                fontWeight={800}
-                sx={{
-                  fontSize: '1.25rem',
-                  letterSpacing: '-0.5px',
-                  background: theme.palette.gradient.primary,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                {tCommon('appName')}
-              </Typography>
-            </Box>
-            {isMobile && (
-              <IconButton 
-                onClick={onClose} 
-                size="small"
-                sx={{
-                  color: 'text.secondary',
-                  '&:hover': {
-                    backgroundColor: 'action.hover',
-                  },
-                }}
-              >
-                <ChevronLeftIcon />
-              </IconButton>
-            )}
-          </>
-        )}
-      </Box>
+            <ChevronLeftIcon />
+          </IconButton>
+        </Box>
+      )}
 
       {/* Navigation */}
       <Box
@@ -388,100 +363,26 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
           },
         }}
       >
-        {/* HOME Section */}
-        {renderSectionHeader('HOME')}
-        <List disablePadding sx={{ px: { xs: 0, md: 0 } }}>
+        {/* Main Navigation */}
+        <List disablePadding sx={{ px: { xs: 0, md: 0 }, pt: 1 }}>
           {homeNavItems.map((item) => renderNavItem(item))}
         </List>
 
-        {/* APPS Section */}
-        {renderSectionHeader('APPS')}
+        {/* Tools Section */}
+        {renderSectionHeader('Tools')}
         <List disablePadding sx={{ px: { xs: 0, md: 0 } }}>
-          {appsNavItems.map((item) => renderNavItem(item))}
+          {toolsNavItems.map((item) => renderNavItem(item))}
+        </List>
+
+        {/* Support Section */}
+        {renderSectionHeader('Support')}
+        <List disablePadding sx={{ px: { xs: 0, md: 0 }, pb: 2 }}>
+          {supportNavItems.map((item) => renderNavItem(item))}
         </List>
       </Box>
-
-      {/* User Profile Footer */}
-      {!showCollapsed && (
-        <>
-          <Divider />
-          <Box
-            sx={{
-              p: 2,
-              m: { xs: 0, md: 1.5 },
-              mb: { xs: 0, md: 1.5 },
-              borderRadius: { xs: 0, md: '12px' },
-              backgroundColor: { 
-                xs: 'transparent', 
-                md: theme.palette.mode === 'light' 
-                  ? 'rgba(93, 135, 255, 0.04)' 
-                  : 'rgba(93, 135, 255, 0.08)' 
-              },
-              transition: 'all 0.2s',
-              cursor: 'pointer',
-              '&:hover': {
-                backgroundColor: { 
-                  xs: 'transparent', 
-                  md: theme.palette.mode === 'light'
-                    ? 'rgba(93, 135, 255, 0.08)' 
-                    : 'rgba(93, 135, 255, 0.12)' 
-                },
-              },
-            }}
-          >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <Avatar
-                src="/avatar.png"
-                alt="Mathew Anderson"
-                sx={{
-                  width: { xs: 44, md: 40 },
-                  height: { xs: 44, md: 40 },
-                  border: `2px solid ${theme.palette.divider}`,
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-              />
-              <Box sx={{ flex: 1, minWidth: 0 }}>
-                <Typography
-                  variant="subtitle2"
-                  fontWeight={600}
-                  noWrap
-                  sx={{
-                    fontSize: { xs: '0.9375rem', md: '0.875rem' },
-                    lineHeight: 1.4,
-                  }}
-                >
-                  Mathew
-                </Typography>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  noWrap
-                  sx={{
-                    fontSize: { xs: '0.8125rem', md: '0.75rem' },
-                    lineHeight: 1.4,
-                  }}
-                >
-                  Designer
-                </Typography>
-              </Box>
-              <IconButton
-                size="small"
-                sx={{
-                  color: 'text.secondary',
-                  width: { xs: 36, md: 32 },
-                  height: { xs: 36, md: 32 },
-                  '&:hover': {
-                    color: 'error.main',
-                    backgroundColor: 'rgba(250, 137, 107, 0.08)',
-                  },
-                }}
-              >
-                <PowerSettingsNewIcon sx={{ fontSize: { xs: 20, md: 18 } }} />
-              </IconButton>
-            </Box>
-          </Box>
-        </>
-      )}
+      {/* Close inner card */}
+      </Box>
+      {/* Close outer wrapper */}
     </Box>
   );
 
@@ -504,10 +405,9 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
             width: drawerWidth,
             boxSizing: 'border-box',
             border: 'none',
-            boxShadow: variant === 'temporary'
-              ? '2px 0 16px rgba(0,0,0,0.15)'
-              : 'none',
-            borderRight: variant === 'permanent' ? `1px solid ${theme.palette.divider}` : 'none',
+            boxShadow: 'none',
+            backgroundColor: { xs: 'background.paper', md: 'background.default' },
+            borderRight: 'none',
             zIndex: variant === 'temporary' ? theme.zIndex.drawer + 2 : theme.zIndex.drawer,
             transition: theme.transitions.create(['width'], {
               easing: theme.transitions.easing.sharp,

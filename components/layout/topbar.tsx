@@ -15,24 +15,25 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AppsIcon from '@mui/icons-material/Apps';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import FlagIcon from '@mui/icons-material/Flag';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LanguageIcon from '@mui/icons-material/Language';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import { useThemeStore } from '@/lib/stores/theme-store';
 import { Link } from '@/i18n/routing';
 import { SearchBar } from '@/components/common/search-bar';
+import { useThemeStore } from '@/lib/stores/theme-store';
 import type { Locale } from '@/types';
 
 interface TopBarProps {
@@ -46,12 +47,11 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
-
+  
   const themeMode = useThemeStore((state) => state.mode);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null);
-  const [localeMenuAnchor, setLocaleMenuAnchor] = useState<null | HTMLElement>(null);
   const [appsMenuAnchor, setAppsMenuAnchor] = useState<null | HTMLElement>(null);
 
   const handleUserMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -62,14 +62,6 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
     setUserMenuAnchor(null);
   };
 
-  const handleLocaleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setLocaleMenuAnchor(event.currentTarget);
-  };
-
-  const handleLocaleMenuClose = () => {
-    setLocaleMenuAnchor(null);
-  };
-
   const handleAppsMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAppsMenuAnchor(event.currentTarget);
   };
@@ -78,9 +70,12 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
     setAppsMenuAnchor(null);
   };
 
+  const handleThemeToggle = () => {
+    toggleTheme();
+  };
+
   const handleLocaleChange = (locale: Locale) => {
     router.replace(pathname, { locale });
-    handleLocaleMenuClose();
   };
 
   const locales: { code: Locale; name: string; flag: string }[] = [
@@ -90,27 +85,35 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
   ];
 
   return (
-    <AppBar
-      position="sticky"
-      elevation={0}
+    <Box
       sx={{
-        backgroundColor: 'background.paper',
-        borderBottom: `1px solid ${theme.palette.divider}`,
-        zIndex: { xs: theme.zIndex.drawer - 1, lg: theme.zIndex.drawer + 1 },
-        top: 0,
-        left: 0,
-        right: 0,
+        p: { xs: 0, md: 2 },
+        pb: { xs: 2, md: 2 },
       }}
     >
-      <Toolbar sx={{ 
-        justifyContent: 'space-between', 
-        px: { xs: 2, sm: 2.5, md: 3 }, 
-        minHeight: { xs: 70, md: 70 },
-        gap: { xs: 1, sm: 2 },
-        width: '100%',
-      }}>
-        {/* Left: Menu and Search */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 }, flex: 1, maxWidth: { xs: '60%', sm: '50%', md: '45%', lg: '40%' } }}>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          backgroundColor: 'background.paper',
+          borderRadius: { xs: 0, md: '20px' },
+          boxShadow: { xs: 'none', md: '0 0 20px rgba(0,0,0,0.05)' },
+          border: { xs: `1px solid ${theme.palette.divider}`, md: 'none' },
+          borderTop: { xs: 'none', md: 'none' },
+          borderLeft: { xs: 'none', md: 'none' },
+          borderRight: { xs: 'none', md: 'none' },
+        }}
+      >
+        <Toolbar sx={{ 
+          display: 'flex',
+          justifyContent: 'space-between', 
+          px: { xs: 2, sm: 2.5, md: 3 }, 
+          minHeight: { xs: 70, md: 70 },
+          gap: { xs: 1, sm: 2 },
+          width: '100%',
+        }}>
+        {/* Left: Menu and Logo */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5, md: 2 }, flexShrink: 0 }}>
           {isMobile && (
             <IconButton
               edge="start"
@@ -128,46 +131,63 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
             </IconButton>
           )}
           
+          {/* Logo */}
+          <Box 
+            component={Link}
+            href="/dashboard"
+            sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: { xs: 0.75, md: 1 },
+              textDecoration: 'none',
+              flexShrink: 0,
+            }}
+          >
+            <Box
+              sx={{
+                width: { xs: 32, md: 36 },
+                height: { xs: 32, md: 36 },
+                borderRadius: { xs: '8px', md: '10px' },
+                background: theme.palette.gradient.primary,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(93, 135, 255, 0.25)',
+              }}
+            >
+              <LocalShippingIcon sx={{ color: 'white', fontSize: { xs: 18, md: 20 } }} />
+            </Box>
+            <Typography
+              variant="h6"
+              fontWeight={800}
+              sx={{
+                fontSize: { xs: '1rem', md: '1.125rem' },
+                letterSpacing: '-0.5px',
+                background: theme.palette.gradient.primary,
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: { xs: 'none', sm: 'block' },
+              }}
+            >
+              {t('appName')}
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Center: Search */}
+        <Box sx={{ 
+          flex: 1, 
+          display: 'flex', 
+          justifyContent: 'center',
+          maxWidth: { xs: '50%', sm: '400px', md: '500px' },
+          mx: 2,
+        }}>
           <SearchBar />
         </Box>
 
         {/* Right: Actions */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 0.5, md: 1 } }}>
-          {/* Locale selector */}
-          <IconButton
-            color="inherit"
-            onClick={handleLocaleMenuOpen}
-            sx={{ 
-              color: 'text.primary',
-              width: { xs: 40, md: 40 },
-              height: { xs: 40, md: 40 },
-            }}
-          >
-            <FlagIcon fontSize={isMobile ? 'small' : 'medium'} />
-          </IconButton>
-
-          {/* Shopping cart - Hidden on mobile */}
-          {!isMobile && (
-            <IconButton color="inherit" sx={{ color: 'text.primary' }}>
-              <Badge badgeContent={0} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-          )}
-
-          {/* Theme toggle */}
-          <IconButton
-            color="inherit"
-            onClick={toggleTheme}
-            sx={{ 
-              color: 'text.primary',
-              width: { xs: 40, md: 40 },
-              height: { xs: 40, md: 40 },
-            }}
-          >
-            {themeMode === 'light' ? <DarkModeIcon fontSize={isMobile ? 'small' : 'medium'} /> : <LightModeIcon fontSize={isMobile ? 'small' : 'medium'} />}
-          </IconButton>
-
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 0.5, md: 1 }, flexShrink: 0 }}>
           {/* Notifications */}
           <IconButton 
             color="inherit" 
@@ -211,64 +231,68 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
           anchorEl={userMenuAnchor}
           open={Boolean(userMenuAnchor)}
           onClose={handleUserMenuClose}
-          onClick={handleUserMenuClose}
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           disableScrollLock
           PaperProps={{
             sx: {
               mt: 1.5,
-              minWidth: 200,
+              minWidth: 220,
             },
           }}
         >
-          <MenuItem>
+          <MenuItem onClick={handleUserMenuClose}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>{t('profile')}</ListItemText>
           </MenuItem>
-          <MenuItem>
+          <MenuItem onClick={handleUserMenuClose}>
             <ListItemIcon>
               <SettingsIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>{t('settings')}</ListItemText>
           </MenuItem>
           <Divider />
-          <MenuItem>
+          
+          {/* Theme Toggle */}
+          <MenuItem onClick={(e) => { e.stopPropagation(); handleThemeToggle(); }}>
+            <ListItemIcon>
+              {themeMode === 'light' ? <DarkModeIcon fontSize="small" /> : <LightModeIcon fontSize="small" />}
+            </ListItemIcon>
+            <ListItemText>{themeMode === 'light' ? 'Dark Mode' : 'Light Mode'}</ListItemText>
+          </MenuItem>
+
+          {/* Language Selector */}
+          <Box sx={{ px: 2, py: 1 }}>
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, display: 'block', mb: 1 }}>
+              Language
+            </Typography>
+            {locales.map((locale) => (
+              <MenuItem
+                key={locale.code}
+                onClick={(e) => { e.stopPropagation(); handleLocaleChange(locale.code); handleUserMenuClose(); }}
+                sx={{ 
+                  borderRadius: 1, 
+                  mb: 0.5,
+                  '&:last-child': { mb: 0 }
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, width: '100%' }}>
+                  <span style={{ fontSize: '1.125rem' }}>{locale.flag}</span>
+                  <span style={{ fontSize: '0.875rem' }}>{locale.name}</span>
+                </Box>
+              </MenuItem>
+            ))}
+          </Box>
+
+          <Divider />
+          <MenuItem onClick={handleUserMenuClose}>
             <ListItemIcon>
               <LogoutIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>{t('logout')}</ListItemText>
           </MenuItem>
-        </Menu>
-
-        {/* Locale Menu */}
-        <Menu
-          anchorEl={localeMenuAnchor}
-          open={Boolean(localeMenuAnchor)}
-          onClose={handleLocaleMenuClose}
-          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-          disableScrollLock
-          PaperProps={{
-            sx: {
-              mt: 1.5,
-              minWidth: 150,
-            },
-          }}
-        >
-          {locales.map((locale) => (
-            <MenuItem
-              key={locale.code}
-              onClick={() => handleLocaleChange(locale.code)}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <span style={{ fontSize: '1.25rem' }}>{locale.flag}</span>
-                <span>{locale.name}</span>
-              </Box>
-            </MenuItem>
-          ))}
         </Menu>
 
         {/* Apps Menu */}
@@ -292,6 +316,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
           <MenuItem onClick={handleAppsMenuClose}>Contacts</MenuItem>
         </Menu>
       </Toolbar>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
 };

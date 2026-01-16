@@ -11,6 +11,11 @@ export const routing = defineRouting({
     '/dashboard/fuel': '/dashboard/fuel',
     '/dashboard/maintenance': '/dashboard/maintenance',
     '/dashboard/settings': '/dashboard/settings',
+    '/dashboard/contacts': '/dashboard/contacts',
+    '/dashboard/chats': '/dashboard/chats',
+    '/dashboard/calendar': '/dashboard/calendar',
+    '/dashboard/email': '/dashboard/email',
+    '/dashboard/tickets': '/dashboard/tickets',
   },
 });
 
