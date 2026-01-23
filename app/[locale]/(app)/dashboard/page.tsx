@@ -42,36 +42,15 @@ import { StatusBadge, StatusType } from '@/components/common/status-badge';
 import { useAlertsStore } from '@/lib/stores/alerts-store';
 import { Link } from '@/i18n/routing';
 
-// Mock data for fleet status donut chart
-const fleetStatusData = [
-  { label: 'Online', value: 12, color: '#13DEB9' },
-  { label: 'Idle', value: 8, color: '#FFAE1F' },
-  { label: 'Maintenance', value: 3, color: '#7C4DFF' },
-  { label: 'Offline', value: 1, color: '#5A6A85' },
-];
-
-// Mock data for fuel consumption chart
-const fuelConsumptionData = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  datasets: [
-    {
-      label: 'This Week',
-      data: [450, 520, 480, 510, 490, 380, 420],
-      color: '#5D87FF',
-    },
-    {
-      label: 'Last Week',
-      data: [420, 480, 460, 530, 470, 350, 400],
-      color: '#B5B9C8',
-    },
-  ],
-};
-
 // Mock data for sparklines
-const vehicleSparkline = [18, 20, 22, 21, 23, 22, 24];
-const tripsSparkline = [8, 10, 12, 9, 11, 10, 12];
-const fuelSparkline = [5, 4, 6, 3, 4, 3, 3];
-const maintenanceSparkline = [3, 4, 3, 5, 4, 6, 5];
+const vehicleSparklineData = [18, 20, 22, 21, 23, 22, 24];
+const tripsSparklineData = [8, 10, 12, 9, 11, 10, 12];
+const fuelSparklineData = [5, 4, 6, 3, 4, 3, 3];
+const maintenanceSparklineData = [3, 4, 3, 5, 4, 6, 5];
+const fuelChartLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const fuelChartThisWeek = [450, 520, 480, 510, 490, 380, 420];
+const fuelChartLastWeek = [420, 480, 460, 530, 470, 350, 400];
+
 
 // Mock activity events
 const activityEvents = [
@@ -302,6 +281,31 @@ const DashboardPage = () => {
   const { alerts, dismiss } = useAlertsStore();
   const recentAlerts = alerts.slice(0, 4);
 
+  // Fleet status data using theme colors
+  const fleetStatusData = useMemo(() => [
+    { label: 'Online', value: 12, color: theme.palette.status.online },
+    { label: 'Idle', value: 8, color: theme.palette.status.idle },
+    { label: 'Maintenance', value: 3, color: theme.palette.status.maintenance },
+    { label: 'Offline', value: 1, color: theme.palette.status.offline },
+  ], [theme]);
+
+  // Fuel consumption data using theme colors
+  const fuelConsumptionData = useMemo(() => ({
+    labels: fuelChartLabels,
+    datasets: [
+      {
+        label: 'This Week',
+        data: fuelChartThisWeek,
+        color: theme.palette.primary.main,
+      },
+      {
+        label: 'Last Week',
+        data: fuelChartLastWeek,
+        color: theme.palette.grey[400],
+      },
+    ],
+  }), [theme]);
+
   const stats = useMemo(
     () => [
       {
@@ -310,7 +314,7 @@ const DashboardPage = () => {
         icon: <LocalShippingOutlined />,
         iconColor: 'primary' as const,
         trend: { value: 5, label: 'vs last month' },
-        sparkline: { values: vehicleSparkline, color: theme.palette.primary.main },
+        sparkline: { values: vehicleSparklineData, color: theme.palette.primary.main },
       },
       {
         title: t('activeTrips'),
@@ -318,7 +322,7 @@ const DashboardPage = () => {
         icon: <DirectionsCarOutlined />,
         iconColor: 'success' as const,
         trend: { value: 8, label: 'vs last week' },
-        sparkline: { values: tripsSparkline, color: theme.palette.success.main },
+        sparkline: { values: tripsSparklineData, color: theme.palette.success.main },
       },
       {
         title: t('fuelAlerts'),
@@ -326,7 +330,7 @@ const DashboardPage = () => {
         icon: <WarningAmberOutlined />,
         iconColor: 'warning' as const,
         trend: { value: -25, label: 'vs yesterday' },
-        sparkline: { values: fuelSparkline, color: theme.palette.warning.main },
+        sparkline: { values: fuelSparklineData, color: theme.palette.warning.main },
       },
       {
         title: t('maintenanceDue'),
@@ -334,7 +338,7 @@ const DashboardPage = () => {
         icon: <BuildOutlined />,
         iconColor: 'error' as const,
         trend: { value: 12, label: 'this week' },
-        sparkline: { values: maintenanceSparkline, color: theme.palette.error.main },
+        sparkline: { values: maintenanceSparklineData, color: theme.palette.error.main },
       },
     ],
     [t, theme]
@@ -358,7 +362,7 @@ const DashboardPage = () => {
 
       {/* Map and Fleet Status Row */}
       <Grid container spacing={3} sx={{ mb: 3 }}>
-        <Grid size={{ xs: 12, lg: 8 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 8, lg: 8 }}>
           <Card sx={{ height: '100%', minHeight: 400 }}>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
@@ -388,7 +392,7 @@ const DashboardPage = () => {
               {/* Map placeholder - integrate with actual map component */}
               <Box
                 sx={{
-                  height: 320,
+                  height: { xs: 250, sm: 280, md: 320, lg: 360 },
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'grey.100',
                   borderRadius: 2,
                   display: 'flex',
@@ -444,7 +448,7 @@ const DashboardPage = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid size={{ xs: 12, lg: 4 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4 }}>
           <DonutChart
             title="Fleet Status"
             subtitle="Current vehicle distribution"
@@ -455,7 +459,7 @@ const DashboardPage = () => {
 
       {/* Fuel Chart and Alerts Row */}
       <Grid container spacing={3} sx={{ mb: 3 }}>
-        <Grid size={{ xs: 12, lg: 8 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 8, lg: 8 }}>
           <LineChart
             title="Fuel Consumption"
             subtitle="Weekly comparison"
@@ -463,7 +467,7 @@ const DashboardPage = () => {
             datasets={fuelConsumptionData.datasets}
           />
         </Grid>
-        <Grid size={{ xs: 12, lg: 4 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 4, lg: 4 }}>
           <Card sx={{ height: '100%' }}>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>

@@ -34,6 +34,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 
 import type { ComponentProps } from 'react';
 
+import { alpha } from '@mui/material/styles';
 import { Link, usePathname } from '@/i18n/routing';
 import { useSidebarStore } from '@/lib/stores/sidebar-store';
 
@@ -177,18 +178,14 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
                 my: 0.25,
                 borderRadius: '10px',
                 position: 'relative',
-                backgroundColor: active 
-                  ? theme.palette.mode === 'light'
-                    ? 'rgba(93, 135, 255, 0.08)'
-                    : 'rgba(93, 135, 255, 0.12)'
+                backgroundColor: active
+                  ? alpha(theme.palette.primary.main, theme.palette.mode === 'light' ? 0.08 : 0.12)
                   : 'transparent',
                 color: active ? 'primary.main' : 'text.secondary',
                 borderLeft: active ? '3px solid' : 'none',
                 borderColor: 'primary.main',
                 '&:hover': {
-                  backgroundColor: theme.palette.mode === 'light' 
-                    ? 'rgba(93, 135, 255, 0.08)'
-                    : 'rgba(93, 135, 255, 0.12)',
+                  backgroundColor: alpha(theme.palette.primary.main, theme.palette.mode === 'light' ? 0.08 : 0.12),
                 },
               }}
             >
@@ -212,22 +209,16 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
             py: { xs: 1.5, md: 1.25 },
             mx: { xs: 0, md: 1 },
             my: { xs: 0, md: 0.25 },
-            borderRadius: { xs: 0, md: '10px' },
+            borderRadius: '10px',
             position: 'relative',
-            backgroundColor: active 
-              ? theme.palette.mode === 'light'
-                ? 'rgba(93, 135, 255, 0.08)'
-                : 'rgba(93, 135, 255, 0.12)'
+            backgroundColor: active
+              ? alpha(theme.palette.primary.main, theme.palette.mode === 'light' ? 0.08 : 0.12)
               : 'transparent',
-            borderLeft: active 
-              ? { xs: '3px solid', md: '3px solid' }
-              : 'none',
+            borderLeft: active ? '3px solid' : 'none',
             borderColor: 'primary.main',
             transition: 'all 0.2s ease-in-out',
             '&:hover': {
-              backgroundColor: theme.palette.mode === 'light' 
-                ? 'rgba(93, 135, 255, 0.08)'
-                : 'rgba(93, 135, 255, 0.12)',
+              backgroundColor: alpha(theme.palette.primary.main, theme.palette.mode === 'light' ? 0.08 : 0.12),
             },
             '&:active': {
               transform: 'scale(0.98)',

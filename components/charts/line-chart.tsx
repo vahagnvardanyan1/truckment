@@ -17,6 +17,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 import { useTheme } from '@mui/material/styles';
 
 ChartJS.register(
@@ -39,9 +40,11 @@ interface LineChartProps {
     data: number[];
     color?: string;
   }[];
+  loading?: boolean;
+  ariaLabel?: string;
 }
 
-export const LineChart = ({ title, subtitle, labels, datasets }: LineChartProps) => {
+export const LineChart = ({ title, subtitle, labels, datasets, loading = false, ariaLabel }: LineChartProps) => {
   const theme = useTheme();
 
   const chartData = useMemo(
@@ -133,6 +136,18 @@ export const LineChart = ({ title, subtitle, labels, datasets }: LineChartProps)
     [theme, datasets.length]
   );
 
+  if (loading) {
+    return (
+      <Card sx={{ height: '100%' }}>
+        <CardContent>
+          <Skeleton variant="text" width="40%" height={28} />
+          {subtitle && <Skeleton variant="text" width="25%" height={20} sx={{ mb: 2 }} />}
+          <Skeleton variant="rectangular" height={300} sx={{ mt: 3, borderRadius: 1 }} />
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card sx={{ height: '100%' }}>
       <CardContent>
@@ -144,7 +159,11 @@ export const LineChart = ({ title, subtitle, labels, datasets }: LineChartProps)
             {subtitle}
           </Typography>
         )}
-        <Box sx={{ mt: 3, height: 300 }}>
+        <Box
+          sx={{ mt: 3, height: 300 }}
+          role="img"
+          aria-label={ariaLabel || `${title} chart showing ${datasets.map(d => d.label).join(' and ')}`}
+        >
           <Line data={chartData} options={options} />
         </Box>
       </CardContent>

@@ -47,18 +47,21 @@ const eventIcons: Partial<Record<TimelineEventType, ReactNode>> = {
   info: <DirectionsCarOutlined />,
 };
 
-const eventColors: Record<TimelineEventType, string> = {
-  trip_start: '#5D87FF',
-  trip_end: '#5A6A85',
-  fuel: '#13DEB9',
-  maintenance: '#7C4DFF',
-  alert: '#FA896B',
-  geofence: '#49BEFF',
-  speed: '#FFAE1F',
-  success: '#13DEB9',
-  warning: '#FFAE1F',
-  error: '#FA896B',
-  info: '#5D87FF',
+// Color mapping will be resolved at render time using theme
+type EventColorKey = 'moving' | 'offline' | 'success' | 'maintenance' | 'error' | 'info' | 'warning' | 'normal';
+
+const eventColorKeys: Record<TimelineEventType, EventColorKey> = {
+  trip_start: 'moving',
+  trip_end: 'offline',
+  fuel: 'success',
+  maintenance: 'maintenance',
+  alert: 'error',
+  geofence: 'info',
+  speed: 'warning',
+  success: 'success',
+  warning: 'warning',
+  error: 'error',
+  info: 'info',
 };
 
 function formatTimestamp(timestamp: Date | string): string {
@@ -99,7 +102,8 @@ interface TimelineItemProps {
 
 function TimelineItem({ event, isLast, compact }: TimelineItemProps) {
   const theme = useTheme();
-  const color = event.color || eventColors[event.type];
+  const colorKey = eventColorKeys[event.type];
+  const color = event.color || theme.palette.status[colorKey] || theme.palette.status.normal;
   const icon = event.icon || eventIcons[event.type];
 
   return (

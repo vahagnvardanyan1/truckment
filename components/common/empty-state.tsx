@@ -28,37 +28,37 @@ interface EmptyStateProps {
 
 const defaultContent: Record<EmptyStateVariant, { icon: ReactNode; title: string; description: string }> = {
   default: {
-    icon: <InboxOutlined sx={{ fontSize: 64 }} />,
+    icon: <InboxOutlined sx={{ fontSize: 48 }} />,
     title: 'No data available',
     description: 'There is no data to display at the moment.',
   },
   search: {
-    icon: <SearchOffOutlined sx={{ fontSize: 64 }} />,
+    icon: <SearchOffOutlined sx={{ fontSize: 48 }} />,
     title: 'No results found',
     description: 'Try adjusting your search or filters to find what you\'re looking for.',
   },
   error: {
-    icon: <ErrorOutlineOutlined sx={{ fontSize: 64 }} />,
+    icon: <ErrorOutlineOutlined sx={{ fontSize: 48 }} />,
     title: 'Something went wrong',
     description: 'We encountered an error while loading the data. Please try again.',
   },
   vehicles: {
-    icon: <DirectionsCarOutlined sx={{ fontSize: 64 }} />,
+    icon: <DirectionsCarOutlined sx={{ fontSize: 48 }} />,
     title: 'No vehicles found',
     description: 'Add your first vehicle to start tracking your fleet.',
   },
   fuel: {
-    icon: <LocalGasStationOutlined sx={{ fontSize: 64 }} />,
+    icon: <LocalGasStationOutlined sx={{ fontSize: 48 }} />,
     title: 'No fuel events',
     description: 'Fuel events will appear here once you start tracking fuel consumption.',
   },
   maintenance: {
-    icon: <BuildOutlined sx={{ fontSize: 64 }} />,
+    icon: <BuildOutlined sx={{ fontSize: 48 }} />,
     title: 'No maintenance records',
     description: 'Maintenance records will appear here once you add them.',
   },
   alerts: {
-    icon: <NotificationsOffOutlined sx={{ fontSize: 64 }} />,
+    icon: <NotificationsOffOutlined sx={{ fontSize: 48 }} />,
     title: 'No alerts',
     description: 'You\'re all caught up! No alerts require your attention.',
   },

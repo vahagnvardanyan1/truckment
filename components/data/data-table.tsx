@@ -290,6 +290,7 @@ export function DataTable<T extends { id: string | number }>({
                 <TableCell
                   key={String(column.id)}
                   align={column.align || 'left'}
+                  scope="col"
                   style={{ minWidth: column.minWidth, maxWidth: column.maxWidth }}
                   sortDirection={orderBy === column.id ? order : false}
                 >
@@ -365,7 +366,9 @@ export function DataTable<T extends { id: string | number }>({
                       <TableCell align="right">
                         <IconButton
                           size="small"
+                          aria-label="Open row actions menu"
                           onClick={(e) => handleActionMenuOpen(e, row)}
+                          sx={{ minWidth: 40, minHeight: 40 }}
                         >
                           <MoreVertOutlined fontSize="small" />
                         </IconButton>

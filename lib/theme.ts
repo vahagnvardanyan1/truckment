@@ -72,31 +72,31 @@ declare module '@mui/material/Typography' {
   }
 }
 
-// Status colors for vehicle/entity states
+// Status colors - DISTINCT from semantic colors
 const statusColors = {
-  online: '#13DEB9',
-  offline: '#5A6A85',
-  moving: '#5D87FF',
-  idle: '#FFAE1F',
-  alert: '#FA896B',
-  maintenance: '#7C4DFF',
-  success: '#13DEB9',
-  warning: '#FFAE1F',
-  error: '#FA896B',
-  info: '#5D87FF',
-  normal: '#5A6A85',
+  online: '#22C55E',      // Green (distinct from success)
+  offline: '#94A3B8',     // Slate gray
+  moving: '#3B82F6',      // Blue (distinct from primary)
+  idle: '#EAB308',        // Yellow
+  alert: '#F97316',       // Orange (distinct from error)
+  maintenance: '#8B5CF6', // Violet
+  success: '#10B981',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  info: '#0EA5E9',
+  normal: '#64748B',
 };
 
 // Data visualization color palette (8 colors for charts)
 const chartColors = [
-  '#5D87FF', // Primary blue
-  '#13DEB9', // Success green
-  '#FFAE1F', // Warning yellow
-  '#FA896B', // Error coral
-  '#7C4DFF', // Purple
-  '#49BEFF', // Cyan
-  '#FF6B9D', // Pink
-  '#6B5AFF', // Indigo
+  '#4F46E5', // Primary indigo
+  '#10B981', // Success emerald
+  '#F59E0B', // Warning amber
+  '#EF4444', // Error red
+  '#8B5CF6', // Purple
+  '#0EA5E9', // Cyan
+  '#EC4899', // Pink
+  '#6366F1', // Indigo
 ];
 
 const commonTheme: ThemeOptions = {
@@ -180,16 +180,18 @@ const commonTheme: ThemeOptions = {
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          boxShadow: '0 0 20px rgba(0,0,0,0.08)',
+          borderRadius: 16,
+          boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)',
+          border: '1px solid rgba(0, 0, 0, 0.05)',
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          padding: '8px 20px',
+          borderRadius: 10,
+          fontWeight: 600,
+          padding: '10px 24px',
           fontSize: '0.9375rem',
         },
         contained: {
@@ -197,6 +199,13 @@ const commonTheme: ThemeOptions = {
           '&:hover': {
             boxShadow: 'none',
           },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
         },
       },
     },
@@ -216,34 +225,34 @@ export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#5D87FF',
-      light: '#ECF2FF',
-      dark: '#4570EA',
+      main: '#4F46E5',      // Indigo - more sophisticated
+      light: '#EEF2FF',
+      dark: '#4338CA',
     },
     secondary: {
-      main: '#49BEFF',
-      light: '#E8F7FF',
-      dark: '#23AFDB',
+      main: '#0EA5E9',      // Sky blue
+      light: '#F0F9FF',
+      dark: '#0284C7',
     },
     success: {
-      main: '#13DEB9',
-      light: '#E6FFFA',
-      dark: '#02B3A9',
+      main: '#10B981',      // Emerald - less neon
+      light: '#ECFDF5',
+      dark: '#059669',
     },
     info: {
-      main: '#539BFF',
-      light: '#EBF3FE',
-      dark: '#1682D4',
+      main: '#3B82F6',
+      light: '#EFF6FF',
+      dark: '#2563EB',
     },
     error: {
-      main: '#FA896B',
-      light: '#FDEDE8',
-      dark: '#F3704D',
+      main: '#EF4444',      // Clean red
+      light: '#FEF2F2',
+      dark: '#DC2626',
     },
     warning: {
-      main: '#FFAE1F',
-      light: '#FEF5E5',
-      dark: '#E58A00',
+      main: '#F59E0B',
+      light: '#FFFBEB',
+      dark: '#D97706',
     },
     grey: {
       50: '#F9FAFB',
@@ -258,21 +267,21 @@ export const lightTheme = createTheme({
       900: '#111827',
     },
     text: {
-      primary: '#2A3547',
-      secondary: '#5A6A85',
+      primary: '#0F172A',   // Darker for better contrast
+      secondary: '#64748B',
     },
     background: {
-      default: '#F5F7FA',
+      default: '#F8FAFC',   // Cooler, more modern
       paper: '#FFFFFF',
     },
     divider: 'rgba(0, 0, 0, 0.08)',
     gradient: {
-      primary: 'linear-gradient(135deg, #5D87FF 0%, #7C4DFF 100%)',
-      secondary: 'linear-gradient(135deg, #49BEFF 0%, #23AFDB 100%)',
-      success: 'linear-gradient(135deg, #13DEB9 0%, #06B7A0 100%)',
-      info: 'linear-gradient(135deg, #539BFF 0%, #1682D4 100%)',
-      error: 'linear-gradient(135deg, #FA896B 0%, #F3704D 100%)',
-      warning: 'linear-gradient(135deg, #FFAE1F 0%, #E58A00 100%)',
+      primary: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+      secondary: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
+      success: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+      info: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+      error: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+      warning: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
     },
     status: statusColors,
     chart: chartColors,
@@ -284,34 +293,34 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#5D87FF',
-      light: '#253662',
-      dark: '#4570EA',
+      main: '#6366F1',      // Slightly lighter indigo for dark mode
+      light: '#312E81',
+      dark: '#4F46E5',
     },
     secondary: {
-      main: '#49BEFF',
-      light: '#1C455D',
-      dark: '#23AFDB',
+      main: '#38BDF8',      // Lighter sky blue
+      light: '#0C4A6E',
+      dark: '#0EA5E9',
     },
     success: {
-      main: '#13DEB9',
-      light: '#1B3C48',
-      dark: '#02B3A9',
+      main: '#34D399',      // Lighter emerald
+      light: '#064E3B',
+      dark: '#10B981',
     },
     info: {
-      main: '#539BFF',
-      light: '#223662',
-      dark: '#1682D4',
+      main: '#60A5FA',
+      light: '#1E3A5F',
+      dark: '#3B82F6',
     },
     error: {
-      main: '#FA896B',
-      light: '#4B313D',
-      dark: '#F3704D',
+      main: '#F87171',      // Lighter red
+      light: '#7F1D1D',
+      dark: '#EF4444',
     },
     warning: {
-      main: '#FFAE1F',
-      light: '#4D3A2C',
-      dark: '#E58A00',
+      main: '#FBBF24',
+      light: '#78350F',
+      dark: '#F59E0B',
     },
     grey: {
       50: '#1F2937',
@@ -326,21 +335,21 @@ export const darkTheme = createTheme({
       900: '#F9FAFB',
     },
     text: {
-      primary: '#EAEFF4',
-      secondary: '#B5B9C8',
+      primary: '#F1F5F9',
+      secondary: '#94A3B8',
     },
     background: {
-      default: '#171C23',
-      paper: '#1E2531',
+      default: '#0F172A',
+      paper: '#1E293B',
     },
     divider: 'rgba(255, 255, 255, 0.08)',
     gradient: {
-      primary: 'linear-gradient(135deg, #5D87FF 0%, #7C4DFF 100%)',
-      secondary: 'linear-gradient(135deg, #49BEFF 0%, #23AFDB 100%)',
-      success: 'linear-gradient(135deg, #13DEB9 0%, #06B7A0 100%)',
-      info: 'linear-gradient(135deg, #539BFF 0%, #1682D4 100%)',
-      error: 'linear-gradient(135deg, #FA896B 0%, #F3704D 100%)',
-      warning: 'linear-gradient(135deg, #FFAE1F 0%, #E58A00 100%)',
+      primary: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
+      secondary: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)',
+      success: 'linear-gradient(135deg, #34D399 0%, #10B981 100%)',
+      info: 'linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%)',
+      error: 'linear-gradient(135deg, #F87171 0%, #EF4444 100%)',
+      warning: 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%)',
     },
     status: statusColors,
     chart: chartColors,

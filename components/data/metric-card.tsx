@@ -134,13 +134,17 @@ export function MetricCard({
       sx={{
         height: '100%',
         cursor: onClick ? 'pointer' : 'default',
+        borderLeft: '4px solid',
+        borderLeftColor: `${iconColor}.main`,
         transition: 'all 0.2s ease-in-out',
         '&:hover': onClick
           ? {
               transform: 'translateY(-2px)',
-              boxShadow: theme.shadows[8],
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             }
-          : {},
+          : {
+              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+            },
         ...sx,
       }}
       onClick={onClick}

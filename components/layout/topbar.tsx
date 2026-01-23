@@ -40,7 +40,7 @@ import type { Locale } from '@/types';
 const LOCALES: { code: Locale; name: string; flag: string }[] = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-  { code: 'hy', name: 'Հdelays', flag: '🇦🇲' },
+  { code: 'hy', name: 'Հայdelays', flag: '🇦🇲' },
 ];
 
 interface TopBarProps {
@@ -98,12 +98,12 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
         elevation={0}
         sx={{
           backgroundColor: 'background.paper',
-          borderRadius: { xs: 0, md: '20px' },
-          boxShadow: { xs: 'none', md: '0 0 20px rgba(0,0,0,0.05)' },
-          border: { xs: `1px solid ${theme.palette.divider}`, md: 'none' },
-          borderTop: { xs: 'none', md: 'none' },
-          borderLeft: { xs: 'none', md: 'none' },
-          borderRight: { xs: 'none', md: 'none' },
+          borderRadius: { xs: '12px', sm: '16px', md: '20px' },
+          boxShadow: { xs: 'none', md: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)' },
+          border: { xs: `1px solid ${theme.palette.divider}`, md: '1px solid rgba(0, 0, 0, 0.05)' },
+          borderTop: { xs: 'none', md: '1px solid rgba(0, 0, 0, 0.05)' },
+          borderLeft: { xs: 'none', md: '1px solid rgba(0, 0, 0, 0.05)' },
+          borderRight: { xs: 'none', md: '1px solid rgba(0, 0, 0, 0.05)' },
         }}
       >
         <Toolbar sx={{ 
@@ -120,12 +120,12 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
             <IconButton
               edge="start"
               color="inherit"
-              aria-label="menu"
+              aria-label="Open navigation menu"
               onClick={onMenuClick}
-              sx={{ 
+              sx={{
                 color: 'text.primary',
-                width: 40,
-                height: 40,
+                width: 44,
+                height: 44,
                 flexShrink: 0,
               }}
             >
@@ -191,12 +191,13 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
         {/* Right: Actions */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 0.5, md: 1 }, flexShrink: 0 }}>
           {/* Notifications */}
-          <IconButton 
-            color="inherit" 
-            sx={{ 
+          <IconButton
+            color="inherit"
+            aria-label="View notifications (4 unread)"
+            sx={{
               color: 'text.primary',
-              width: { xs: 40, md: 40 },
-              height: { xs: 40, md: 40 },
+              width: { xs: 44, md: 44 },
+              height: { xs: 44, md: 44 },
             }}
           >
             <Badge badgeContent={4} color="error">
@@ -209,6 +210,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
             <IconButton
               color="inherit"
               onClick={handleAppsMenuOpen}
+              aria-label="Open apps menu"
               sx={{ color: 'text.primary' }}
             >
               <AppsIcon />
@@ -218,6 +220,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
           {/* User avatar */}
           <IconButton
             onClick={handleUserMenuOpen}
+            aria-label="Open user menu"
             sx={{ p: { xs: 0.25, md: 0.5 } }}
           >
             <Avatar

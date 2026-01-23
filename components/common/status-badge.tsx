@@ -2,6 +2,7 @@
 
 import { Chip, ChipProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { prefersReducedMotion, getStatusAriaLabel } from '@/lib/accessibility';
 
 export type StatusType = 'online' | 'offline' | 'moving' | 'idle' | 'alert' | 'maintenance' | 'success' | 'warning' | 'error' | 'info' | 'normal';
 
@@ -27,11 +28,14 @@ const statusLabels: Record<StatusType, string> = {
 export function StatusBadge({ status, showDot = true, label, sx, ...props }: StatusBadgeProps) {
   const theme = useTheme();
   const statusColor = theme.palette.status[status];
+  const reducedMotion = prefersReducedMotion();
+  const shouldPulse = !reducedMotion && (status === 'moving' || status === 'online');
 
   return (
     <Chip
       size="small"
       label={label || statusLabels[status]}
+      aria-label={getStatusAriaLabel(status)}
       icon={
         showDot ? (
           <span
@@ -41,7 +45,7 @@ export function StatusBadge({ status, showDot = true, label, sx, ...props }: Sta
               borderRadius: '50%',
               backgroundColor: statusColor,
               marginLeft: 8,
-              animation: status === 'moving' || status === 'online' ? 'pulse 2s infinite' : undefined,
+              animation: shouldPulse ? 'pulse 2s infinite' : undefined,
             }}
           />
         ) : undefined
