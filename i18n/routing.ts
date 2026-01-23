@@ -10,6 +10,8 @@ export const routing = defineRouting({
     '/dashboard/vehicles': '/dashboard/vehicles',
     '/dashboard/fuel': '/dashboard/fuel',
     '/dashboard/maintenance': '/dashboard/maintenance',
+    '/dashboard/reports': '/dashboard/reports',
+    '/dashboard/alerts': '/dashboard/alerts',
     '/dashboard/settings': '/dashboard/settings',
     '/dashboard/contacts': '/dashboard/contacts',
     '/dashboard/chats': '/dashboard/chats',

@@ -29,6 +29,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 import type { ComponentProps } from 'react';
 
@@ -89,6 +91,19 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
       label: tCommon('maintenance'),
       icon: <BuildIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
       path: '/dashboard/maintenance',
+    },
+    {
+      id: 'reports',
+      label: 'Reports',
+      icon: <AssessmentIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
+      path: '/dashboard/reports',
+    },
+    {
+      id: 'alerts',
+      label: 'Alerts',
+      icon: <NotificationsIcon sx={{ fontSize: { xs: 20, md: 22 } }} />,
+      path: '/dashboard/alerts',
+      badge: 3,
     },
   ];
 
