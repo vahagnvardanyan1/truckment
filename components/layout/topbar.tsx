@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
 import AppBar from '@mui/material/AppBar';
@@ -36,6 +36,13 @@ import { SearchBar } from '@/components/common/search-bar';
 import { useThemeStore } from '@/lib/stores/theme-store';
 import type { Locale } from '@/types';
 
+// Hoisted outside component to avoid recreation on every render
+const LOCALES: { code: Locale; name: string; flag: string }[] = [
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+  { code: 'hy', name: 'Հdelays', flag: '🇦🇲' },
+];
+
 interface TopBarProps {
   onMenuClick: () => void;
   onSidebarToggle?: () => void;
@@ -54,35 +61,30 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null);
   const [appsMenuAnchor, setAppsMenuAnchor] = useState<null | HTMLElement>(null);
 
-  const handleUserMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleUserMenuOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setUserMenuAnchor(event.currentTarget);
-  };
+  }, []);
 
-  const handleUserMenuClose = () => {
+  const handleUserMenuClose = useCallback(() => {
     setUserMenuAnchor(null);
-  };
+  }, []);
 
-  const handleAppsMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleAppsMenuOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAppsMenuAnchor(event.currentTarget);
-  };
+  }, []);
 
-  const handleAppsMenuClose = () => {
+  const handleAppsMenuClose = useCallback(() => {
     setAppsMenuAnchor(null);
-  };
+  }, []);
 
-  const handleThemeToggle = () => {
+  const handleThemeToggle = useCallback(() => {
     toggleTheme();
-  };
+  }, [toggleTheme]);
 
-  const handleLocaleChange = (locale: Locale) => {
+  const handleLocaleChange = useCallback((locale: Locale) => {
     router.replace(pathname, { locale });
-  };
+  }, [router, pathname]);
 
-  const locales: { code: Locale; name: string; flag: string }[] = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-    { code: 'hy', name: 'Հայերեն', flag: '🇦🇲' },
-  ];
 
   return (
     <Box
@@ -268,7 +270,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
             <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, display: 'block', mb: 1 }}>
               Language
             </Typography>
-            {locales.map((locale) => (
+            {LOCALES.map((locale) => (
               <MenuItem
                 key={locale.code}
                 onClick={(e) => { e.stopPropagation(); handleLocaleChange(locale.code); handleUserMenuClose(); }}

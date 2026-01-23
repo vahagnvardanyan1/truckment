@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ReactNode, useEffect } from 'react';
+import { useState, ReactNode, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -15,6 +15,7 @@ interface AppShellProps {
 
 const DRAWER_WIDTH = 270;
 const COLLAPSED_WIDTH = 87;
+const NOOP = () => {};
 
 export const AppShell = ({ children }: AppShellProps) => {
   const theme = useTheme();
@@ -23,17 +24,17 @@ export const AppShell = ({ children }: AppShellProps) => {
   const isCollapsed = useSidebarStore((state) => state.isCollapsed);
   const toggleCollapse = useSidebarStore((state) => state.toggleCollapse);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const handleDrawerToggle = useCallback(() => {
+    setMobileOpen((prev) => !prev);
+  }, []);
 
-  const handleSidebarToggle = () => {
+  const handleSidebarToggle = useCallback(() => {
     if (isMobile) {
-      handleDrawerToggle();
+      setMobileOpen((prev) => !prev);
     } else {
       toggleCollapse();
     }
-  };
+  }, [isMobile, toggleCollapse]);
 
   // Close mobile drawer when switching to desktop
   useEffect(() => {
@@ -62,7 +63,7 @@ export const AppShell = ({ children }: AppShellProps) => {
       ) : (
         <Sidebar
           open={true}
-          onClose={() => {}}
+          onClose={NOOP}
           variant="permanent"
         />
       )}

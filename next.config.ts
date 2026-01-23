@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
     styledComponents: true,
   },
   reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+  },
 };
 
 export default withNextIntl(nextConfig);

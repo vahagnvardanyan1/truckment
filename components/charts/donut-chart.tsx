@@ -50,42 +50,45 @@ export const DonutChart = ({ title, subtitle, data }: DonutChartProps) => {
     [data, theme]
   );
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: true,
-    cutout: '70%',
-    plugins: {
-      legend: {
-        position: 'bottom' as const,
-        labels: {
-          padding: 20,
-          usePointStyle: true,
-          pointStyle: 'circle',
-          color: theme.palette.text.primary,
-          font: {
-            size: 13,
-            family: theme.typography.fontFamily,
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: true,
+      cutout: '70%',
+      plugins: {
+        legend: {
+          position: 'bottom' as const,
+          labels: {
+            padding: 20,
+            usePointStyle: true,
+            pointStyle: 'circle',
+            color: theme.palette.text.primary,
+            font: {
+              size: 13,
+              family: theme.typography.fontFamily,
+            },
+          },
+        },
+        tooltip: {
+          backgroundColor: theme.palette.background.paper,
+          titleColor: theme.palette.text.primary,
+          bodyColor: theme.palette.text.secondary,
+          borderColor: theme.palette.divider,
+          borderWidth: 1,
+          padding: 12,
+          displayColors: true,
+          callbacks: {
+            label: (context: any) => {
+              const label = context.label || '';
+              const value = context.parsed || 0;
+              return `${label}: ${value}`;
+            },
           },
         },
       },
-      tooltip: {
-        backgroundColor: theme.palette.background.paper,
-        titleColor: theme.palette.text.primary,
-        bodyColor: theme.palette.text.secondary,
-        borderColor: theme.palette.divider,
-        borderWidth: 1,
-        padding: 12,
-        displayColors: true,
-        callbacks: {
-          label: (context: any) => {
-            const label = context.label || '';
-            const value = context.parsed || 0;
-            return `${label}: ${value}`;
-          },
-        },
-      },
-    },
-  };
+    }),
+    [theme]
+  );
 
   return (
     <Card sx={{ height: '100%' }}>
