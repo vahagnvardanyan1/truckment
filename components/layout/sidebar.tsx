@@ -450,9 +450,9 @@ export const Sidebar = ({ open, onClose, variant = 'permanent' }: SidebarProps) 
               duration: 225,
             }),
             '&:hover': {
-              backgroundColor: 'primary.main',
-              borderColor: 'primary.main',
-              boxShadow: '0 4px 12px rgba(93, 135, 255, 0.3)',
+              backgroundColor: 'secondary.main',
+              borderColor: 'secondary.main',
+              boxShadow: '0 4px 12px rgba(0, 212, 170, 0.3)',
               '& svg': {
                 color: 'white',
               },

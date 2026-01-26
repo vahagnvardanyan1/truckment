@@ -20,7 +20,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import NavigationIcon from '@mui/icons-material/Navigation';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AppsIcon from '@mui/icons-material/Apps';
 import PersonIcon from '@mui/icons-material/Person';
@@ -157,7 +157,7 @@ export const TopBar = ({ onMenuClick, onSidebarToggle }: TopBarProps) => {
                 boxShadow: '0 4px 12px rgba(93, 135, 255, 0.25)',
               }}
             >
-              <LocalShippingIcon sx={{ color: 'white', fontSize: { xs: 18, md: 20 } }} />
+              <NavigationIcon sx={{ color: 'white', fontSize: { xs: 18, md: 20 }, transform: 'rotate(45deg)' }} />
             </Box>
             <Typography
               variant="h6"

@@ -1,62 +1,65 @@
-Truckment Dashboard Application Requirements
+Product Functional Specification
 
-- You are Principal Product UI/UX Designer and Senior Staff Software Engineer.
+1.1 Vehicle location tracking. Provide the ability for the user to mark specific points on the map where an automatic notification will be sent once the vehicle reaches those points.
 
-Stack and Frameworks
-- Next.js 16 (app router) with React 19; TypeScript preferred.
-- UI: Material UI with styled-components; support light and dark themes.
-- Internationalization: next-intl for all user-facing text.
-- Charts: chart.js for all visualizations.
-- Target UX baseline: match the look-and-feel of https://modernize-nextjs.adminmart.com/ (cards, spacing, iconography, gradients, rounded corners, shadows, pill badges).
+2.1 Recording the moment of replacement of fast-wear vehicle spare parts and entering the next replacement time in kilometers.
 
-Navigation and Layout
-- Default entry route `/dashboard`; intuitive navigation to vehicle detail, maintenance, fuel, and settings.
-- Responsive layouts for desktop, tablet, and mobile.
-- Global theme toggle (light/dark) and locale switcher.
-- Left rail + top bar pattern similar to Modernize:
-  - Collapsible left navigation with icons, section headers (e.g., Home, Apps), nested groups, and badges (e.g., “New”, counts).
-  - Top bar: locale flag selector, cart/alerts icons with badges, theme toggle, notifications bell, app launcher grid, and user avatar.
-- Dashboard cards styled like Modernize: soft shadows, rounded corners, subtle gradients, icon circles, and clear hierarchy for titles/metrics.
-- Mobile: slide-in drawer navigation, sticky top bar, prominent FAB/settings button, touch-friendly hit areas.
-- Provide quick-launch drawer/panel for common actions (e.g., open chats, calendar, email) similar to Modernize “Apps” dropdown.
+3.1 Provide a platform where companies engaged in selling vehicle spare parts can place advertisements.
 
-Map and Location
-- Map providers: Google Maps, Yandex Maps, plus at least one alternative; user-selectable with fallback handling.
-- Vehicle live tracking with status (engine on/off, current speed).
-- Trajectory view: distance/time to next stop and ETAs.
-- Geofence points: allow users to mark points/areas and send automatic notifications upon arrival/exit.
-- Trip history: kilometers driven between time X and Y with filterable date ranges.
+4.1 Reports on spare-part replacement timelines and costs related to X vehicle for any selected time period.
 
-Fuel Management
-- Track fill and drain events (liters added/removed, timestamp, location).
-- Calculate and display fuel consumption between coordinate X and Y based on tank level changes (excluding drains).
-- Send automatic notifications for each fuel event and anomaly (e.g., sudden drop).
-- Chart fuel level over time and per-trip consumption.
+1.2 Display whether the vehicle engine is running or not.
 
-Maintenance and Parts
-- Record wear-part replacements with current odometer and next replacement distance.
-- Oil change tracking with brand, supplier, price; upcoming oil change reminders based on mileage/time thresholds.
-- Spare parts: fields for part/oil brand, supplier, price, notes; attach receipts if available.
-- Maintenance schedule view with upcoming items and overdue alerts.
+2.2 When replacing a spare part/oil, provide fields to optionally enter the spare part/oil brand, supplier name, manufacturer, and price.
 
-Alerts and Notifications
-- Configurable notifications (push/email/SMS placeholder) for geofence arrivals, fuel events, maintenance due, insurance/inspection expiry, and abnormal telemetry (e.g., speeding).
-- Snooze/acknowledge workflow with audit trail.
+3.2 Involve insurance companies so they can place advertisements on the platform.
 
-Insurance and Compliance
-- Store insurance details and inspection dates; notify when nearing expiration.
-- Display countdown to expiration on dashboard.
+4.2 Reports on fuel consumption of X vehicle by kilometers and time period.
 
-Telemetry and Analytics
-- Dashboard cards: engine status, current speed, live location, ETA to next stop, distance today/this week, fuel level, active alerts.
-- Charts for speed history, fuel consumption, and distance traveled over selected ranges.
-- Export basic reports (CSV) for trips, fuel, and maintenance.
+1.3 Vehicle speed.
 
-Settings and Access
-- User profile preferences: units (km/mi, liters/gallons), time zone, locale, default map provider.
-- Role-based access (admin, dispatcher, viewer) with appropriate permissions.
+2.3 Monitor the vehicle engine temperature.
 
-Non-Functional
-- Handle offline/poor network gracefully with cached recent data and clear status indicators.
-- Log and surface API errors with user-friendly messages; include retry where safe.
-- Follow accessibility best practices (keyboard nav, ARIA labels, contrast).
+3.3 Advertisements for vehicle service centers, car wash stations, and vehicle sales companies.
+
+4.3 Reports allowing comparison of the efficiency of different spare part/oil brands by cost and by kilometers.
+
+1.4 Vehicle route: how far the vehicle travels until the next stop and in what amount of time.
+
+2.4 Automatic notification system indicating that the oil replacement time is approaching, based on user-entered data.
+
+4.4 Report showing which vehicle is the most efficient, considering distance traveled and expenses related to fast-wear spare part replacements.
+
+1.5 Ability to view at any time how many kilometers the vehicle has traveled between time X and time Y.
+
+2.5 Add fields to enter vehicle insurance and technical inspection expiration dates, with automatic notifications when they are nearing expiration.
+
+4.5 AI tool that allows assigning the AI to generate specific reports, for example: why X vehicle covered a specific route segment in 10 hours instead of 7 hours, and similar questions.
+
+1.6 Fuel tank monitoring: liters refueled, liters drained, and display how many liters the vehicle consumed between coordinate X and Y (can be calculated based on tank capacity reduction, excluding draining). Automatic notifications for every action.
+
+2.6 Provide chat functionality between the user and individual drivers, as well as group chat capability.
+
+1.7 Provide a tool that allows importers/exporters to gain access to tracking the location of vehicles carrying their specific cargo. This is not limited to trucks only—leasing companies and banks can also track the location of leased equipment.
+
+1.8 Install weighing systems to determine whether the vehicle is loaded or not.
+
+Fast-wear spare parts:
+
+Engine oil, transmission oil, axle oil, tires, brake pads, etc.
+
+Target vehicles:
+
+Heavy trucks, light commercial vehicles, construction and agricultural machinery, passenger vehicles used for transportation services.
+
+Target companies:
+
+International transportation companies, delivery networks and suppliers with vehicle fleets, leasing companies, construction and earth-moving companies, car rental companies, Yerevan Municipality (for buses and garbage trucks), Ministry of Internal Affairs police and patrol service, and other government institutions.
+
+Secondary users:
+
+Individual vehicle owners with very limited functionality, mainly for informational purposes.
+
+Additional:
+
+Implement an online payment system via card.

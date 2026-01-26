@@ -23,10 +23,9 @@ export const WelcomeBanner = ({ userName, userAvatar, stats }: WelcomeBannerProp
       sx={{
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(135deg, #E3F2FD 0%, #E8EAF6 100%)',
-        ...(theme.palette.mode === 'dark' && {
-          background: 'linear-gradient(135deg, #1E3A5F 0%, #2E1A47 100%)',
-        }),
+        background: theme.palette.mode === 'dark'
+          ? theme.palette.gradient.primary
+          : 'linear-gradient(135deg, #E6FBF6 0%, #E8F4FC 100%)',
       }}
     >
       <Box

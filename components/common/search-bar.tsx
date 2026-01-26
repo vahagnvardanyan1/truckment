@@ -276,10 +276,10 @@ export const SearchBar = () => {
                                     px: { xs: 3, sm: 2.5 },
                                     py: { xs: 1.5, sm: 1 },
                                     '&:hover': {
-                                      backgroundColor: 'rgba(93, 135, 255, 0.08)',
+                                      backgroundColor: 'rgba(0, 212, 170, 0.08)',
                                     },
                                     '&:active': {
-                                      backgroundColor: 'rgba(93, 135, 255, 0.12)',
+                                      backgroundColor: 'rgba(0, 212, 170, 0.12)',
                                     },
                                   }}
                                 >
@@ -290,7 +290,7 @@ export const SearchBar = () => {
                                           width: { xs: 38, sm: 34 },
                                           height: { xs: 38, sm: 34 },
                                           borderRadius: '8px',
-                                          backgroundColor: 'rgba(93, 135, 255, 0.1)',
+                                          backgroundColor: 'rgba(0, 212, 170, 0.1)',
                                           display: 'flex',
                                           alignItems: 'center',
                                           justifyContent: 'center',

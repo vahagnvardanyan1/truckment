@@ -2,11 +2,18 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
+import { Inter } from 'next/font/google';
 
 import { routing } from '@/i18n/routing';
 import { ThemeProvider } from '@/lib/providers/theme-provider';
 
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 interface LocaleLayoutProps {
   children: ReactNode;
@@ -27,8 +34,8 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={inter.variable}>
+      <body className={inter.className} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>

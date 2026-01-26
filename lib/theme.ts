@@ -89,19 +89,19 @@ const statusColors = {
 
 // Data visualization color palette (8 colors for charts)
 const chartColors = [
-  '#4F46E5', // Primary indigo
+  '#0D1B2A', // Primary deep navy
+  '#00D4AA', // Accent electric teal
+  '#2563EB', // Signal blue
   '#10B981', // Success emerald
   '#F59E0B', // Warning amber
   '#EF4444', // Error red
   '#8B5CF6', // Purple
-  '#0EA5E9', // Cyan
-  '#EC4899', // Pink
-  '#6366F1', // Indigo
+  '#3D5A73', // Slate steel
 ];
 
 const commonTheme: ThemeOptions = {
   typography: {
-    fontFamily: '"Plus Jakarta Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     // Display typography for hero sections and large headings
     display1: {
       fontSize: '3.5rem',
@@ -189,15 +189,22 @@ const commonTheme: ThemeOptions = {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 10,
+          borderRadius: 8,
           fontWeight: 600,
           padding: '10px 24px',
           fontSize: '0.9375rem',
+          textTransform: 'none',
         },
         contained: {
           boxShadow: 'none',
           '&:hover': {
-            boxShadow: 'none',
+            boxShadow: '0 4px 12px rgba(0, 212, 170, 0.25)',
+          },
+        },
+        containedSecondary: {
+          color: '#0D1B2A',
+          '&:hover': {
+            backgroundColor: '#00BF9A',
           },
         },
       },
@@ -205,7 +212,7 @@ const commonTheme: ThemeOptions = {
     MuiIconButton: {
       styleOverrides: {
         root: {
-          borderRadius: 10,
+          borderRadius: 8,
         },
       },
     },
@@ -225,24 +232,24 @@ export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#4F46E5',      // Indigo - more sophisticated
-      light: '#EEF2FF',
-      dark: '#4338CA',
+      main: '#0D1B2A',      // Deep Navy - premium enterprise
+      light: '#1E3A5F',
+      dark: '#0A1520',
     },
     secondary: {
-      main: '#0EA5E9',      // Sky blue
-      light: '#F0F9FF',
-      dark: '#0284C7',
+      main: '#00D4AA',      // Electric Teal - accent
+      light: '#E6FBF6',
+      dark: '#059669',
     },
     success: {
-      main: '#10B981',      // Emerald - less neon
+      main: '#10B981',      // Emerald
       light: '#ECFDF5',
       dark: '#059669',
     },
     info: {
-      main: '#3B82F6',
+      main: '#2563EB',      // Signal Blue
       light: '#EFF6FF',
-      dark: '#2563EB',
+      dark: '#1D4ED8',
     },
     error: {
       main: '#EF4444',      // Clean red
@@ -267,19 +274,19 @@ export const lightTheme = createTheme({
       900: '#111827',
     },
     text: {
-      primary: '#0F172A',   // Darker for better contrast
-      secondary: '#64748B',
+      primary: '#0D1B2A',   // Deep Navy for text
+      secondary: '#3D5A73', // Slate Steel
     },
     background: {
-      default: '#F8FAFC',   // Cooler, more modern
+      default: '#F8FAFC',   // Arctic White
       paper: '#FFFFFF',
     },
     divider: 'rgba(0, 0, 0, 0.08)',
     gradient: {
-      primary: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
-      secondary: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
+      primary: 'linear-gradient(135deg, #0D1B2A 0%, #1E3A5F 50%, #2563EB 100%)',
+      secondary: 'linear-gradient(135deg, #00D4AA 0%, #059669 100%)',
       success: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-      info: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+      info: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
       error: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
       warning: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
     },
@@ -293,14 +300,14 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#6366F1',      // Slightly lighter indigo for dark mode
-      light: '#312E81',
-      dark: '#4F46E5',
+      main: '#2563EB',      // Signal Blue for dark mode (better visibility)
+      light: '#1E3A5F',
+      dark: '#1D4ED8',
     },
     secondary: {
-      main: '#38BDF8',      // Lighter sky blue
-      light: '#0C4A6E',
-      dark: '#0EA5E9',
+      main: '#00D4AA',      // Electric Teal
+      light: '#064E3B',
+      dark: '#059669',
     },
     success: {
       main: '#34D399',      // Lighter emerald
@@ -339,13 +346,13 @@ export const darkTheme = createTheme({
       secondary: '#94A3B8',
     },
     background: {
-      default: '#0F172A',
+      default: '#0D1B2A',   // Deep Navy background
       paper: '#1E293B',
     },
     divider: 'rgba(255, 255, 255, 0.08)',
     gradient: {
-      primary: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
-      secondary: 'linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%)',
+      primary: 'linear-gradient(135deg, #1E3A5F 0%, #2563EB 50%, #00D4AA 100%)',
+      secondary: 'linear-gradient(135deg, #00D4AA 0%, #059669 100%)',
       success: 'linear-gradient(135deg, #34D399 0%, #10B981 100%)',
       info: 'linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%)',
       error: 'linear-gradient(135deg, #F87171 0%, #EF4444 100%)',
